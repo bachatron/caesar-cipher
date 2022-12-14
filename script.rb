@@ -1,36 +1,29 @@
-def check_number (number)
-    abc = ('a'..'z').to_a
-    unless abc.length <=number
+def check_number(number)
+    # This method checks if the shift number is between a..z range.
+    if 26 <= number
+        # a..z length is 26
+        number % 26
+    else
         number
-      else 
-        number - abc.length
     end
 end
   
-check_number (27)
-  
-text = "hola me llamo bach!!!"
-  
-arr_text = text.split(//)
-
-def caesar_cipher (string, index)
-        string.split("").map do |letter|
-        abc = ('a'..'z').to_a
-        if abc.include? (letter)
-            idx = abc.index(letter)
-            letter = abc[idx.to_i + check_number(index)]
-        end
+def caesar_cipher(string, shift)
+    arr_string = string.split('')
+    # We create to arrays one for upcase abc and one for downcase
+    abc = ('a'..'z').to_a
+    aBC = ('A'..'Z').to_a
+    arr_string.map! do |letter|
+        letter = if abc.include?(letter)
+                    abc[check_number(abc.index(letter) + shift)]
+                elsif aBC.include?(letter)
+                    aBC[check_number(aBC.index(letter) + shift)]
+                else
+                    letter
+                end
     end
+    arr_string.join('')
 end
-
-
-#new_arr_text = arr_text.map do |letter|
-#    abc = ('a'..'z').to_a
-#    if abc.include? (letter)
-#        idx = abc.index(letter)
-#        letter = abc[idx.to_i + check_number()]
-#    end
-#end
-
-new_arr = caesar_cipher("hola mi nombre es bach", 50)
-puts new_arr
+  
+test = caesar_cipher('Hola me llamo bach!!!', 1)
+puts test

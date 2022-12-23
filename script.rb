@@ -1,11 +1,7 @@
 def check_number(number)
     # This method checks if the shift number is between a..z range.
-    if 26 <= number
-        # a..z length is 26
-        number % 26
-    else
-        number
-    end
+    return number % 26 if number >= 26
+    number
 end
   
 def caesar_cipher(string, shift)
@@ -25,5 +21,5 @@ def caesar_cipher(string, shift)
     arr_string.join('')
 end
   
-test = caesar_cipher('Hola me llamo bach!!!', 1)
+test = caesar_cipher('Hola me llamo bach!!!', 3)
 puts test
